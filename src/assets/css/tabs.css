@@ -11,9 +11,9 @@ ul, ol {
 	list-style-type: none;
 }
 .menu {
-	position: absolute;
-	top: 0px;
-    left: 20px;
+	float: left;
+	margin-top: 100px;
+	margin-left: 40px;
 	width: 260px;
 	z-index: 999;
 	background-color: #fff;
@@ -38,7 +38,7 @@ ul, ol {
 	border-right-color: #dbdbdb;
 	border-bottom-color: #dbdbdb;
 	border-left-color: #dbdbdb;
-	height: 29px;
+	height: 45px;
 	position: relative;
 	color: #336699;
 	float: left;
@@ -46,7 +46,13 @@ ul, ol {
 	width: 258px;
 }
 .menu ul li p{
-	padding: 8px 0;
+	padding: 12px 0;
+	cursor: pointer;
+	border-bottom: 1px solid #dbdbdb;
+}
+.menu ul li p:hover{
+color: rgb(221, 117, 117);
+
 }
 .menu ul li span {
 	border-bottom-width: 1px;
@@ -59,7 +65,7 @@ ul, ol {
 	width: 150px;
 	display: block;
 }
-.menu ul li:hover {
+/* .menu ul li:hover {
 	color: #f83100;
 	background-color: #f2f2f2;
 }
@@ -70,15 +76,16 @@ ul, ol {
 .menu ul li:hover ol {
 	position: absolute;
 	display: block;
-}
+} */
 .menu ul li ol {
+	/* display: none; */
 	position: absolute;
 	left: 260px;
 	width: 250px;
 	background-color: #f2f2f2;
 	border: 1px solid #ccc;
 	top: -31px;
-	display: none;
+	z-index: 9999;
 }
 .menu ul li ol dl {
 	position: relative;

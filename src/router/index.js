@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 const Home = () => import('@/components/Home')
 const CoursePage = () => import('@/components/CoursePage')
+const CourseDetail = () => import('@/components/CourseDetail')
+const CoursePlay = () => import('@/components/CoursePlay')
 const MyStudy = () => import('@/components/MyStudy')
 
 
@@ -28,6 +30,18 @@ export default new Router({
       path: '/mystudy',
       name: 'MyStudy',
       component: MyStudy
+    }
+    ,
+    {
+      path: '/coursedetail',
+      name: 'CourseDetail',
+      component: CourseDetail
+    }
+    ,
+    {
+      path: '/courseplay',
+      name: 'CoursePlay',
+      component: CoursePlay
     }
   ]
 })

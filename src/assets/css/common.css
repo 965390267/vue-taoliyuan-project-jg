@@ -30,12 +30,16 @@ header{
     height: 72px;
     line-height: 72px;
 }
+
 .list li a{
     display: block;
     height: 72px;
     width: 72px;
     text-align: center;
     color:#07111b;
+}
+.router-link-exact-active{
+    color: #ef5350!important;
 }
 .search-wrap{
     position: relative;
@@ -66,7 +70,7 @@ header{
 } */
 .search{
     position: absolute;
-    right: 40px;
+    right: 18px;
     top: 26px;
     width: 25px;
     height: 25px;
@@ -306,8 +310,7 @@ cursor: pointer;
 
 /* 课程列表样式 */
  .types-content {
-    width: 1200px;
-    margin: 0 auto;
+   
     margin-top: 24px;
     /* margin-left: -18px; */
 }

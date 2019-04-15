@@ -4,11 +4,18 @@
             <div class="bk" :style="{backgroundImage:''+filterimg+''}">
             </div>
             <!-- Swiper -->
-            <slider :pages="pages" :sliderinit="sliderinit">
-    <!-- slot  -->
-          </slider>
+          <swiper :options="swiperOption" ref="mySwiper" @someSwiperEvent="callback">
+    <!-- slides -->
+  <div class="swiper-slide" v-for="item in bannerlist"
+                        :style="{backgroundImage:'url('+item.image+')'}" :key='item.id'>
+                    </div>
+    <!-- Optional controls -->
+    <div class="swiper-pagination"  slot="pagination"></div>
+    <div class="swiper-button-prev" slot="button-prev"></div>
+    <div class="swiper-button-next" slot="button-next"></div>
+    <!-- <div class="swiper-scrollbar"   slot="scrollbar"></div> -->
+  </swiper>
         </div>
-
          <div class="body">
             <h3 class="types-title">
                 <span class="tit-icon icon-shizhan-l tit-icon-l"></span>
@@ -16,22 +23,15 @@
                 <span class="tit-icon icon-shizhan-r tit-icon-r"></span>
             </h3>
             <div class="clearfix types-content">
-
                 <div class="index-card-container course-card-container container" v-for='(item,index) in discount' :key='index'>
                     <a target="_blank" class="course-card" href="" data-track="sztj-1-2">
-
-
                         <div class="course-stat new">
-                           新课
-                         
+                           新课                       
                         </div>
                         <div class="course-card-top hashadow">
                             <img class="course-banner" v-lazy="item.cover">
-
-
                             <div class="course-label">
                                 <!-- <label>剩余{{item.diff.hour}}小时{{item.diff.minute}}分{{item.diff.second}}秒</label> -->
-
                             </div>
                         </div>
                         <div class="course-card-content">
@@ -41,8 +41,6 @@
                                     <span>已有 <em> {{item.buyerNum}}</em>购买</span>
                                     <!-- <span class="course-star-box">剩余3天5小时10分30秒</span> -->
                                 </div>
-
-
                                 <div class="course-card-price sales">
                                     <span class="source-price">￥{{item.price}}</span>
                                     <span class="cost-price">￥{{item.discountPrice}}</span>
@@ -52,8 +50,6 @@
                         </div>
                     </a>
                 </div>
-
-
             </div>
 
             <h3 class="types-title">
@@ -65,19 +61,11 @@
                 <div class="index-card-container course-card-container container" v-for="(item,index) in teacherlist"
                     :key='index'>
                     <a class="course-card" :href="'course.html?cid='+item.courseId">
-
-
                         <div class="course-card-top hashadow">
                             <img class="course-banner" v-lazy="item.image">
-
-
                         </div>
-
                     </a>
                 </div>
-
-
-
             </div>
             <h3 class="types-title">
                 <span class="tit-icon icon-tech-l tit-icon-l"></span>
@@ -113,12 +101,8 @@
                                             class="icon-star2 on"></i><i class="icon-star2 on"></i><i
                                             class="icon-star2 on"></i><i class="icon-star2 on"></i></span> -->
                                 </div>
-
-
                                 <div class="course-card-price sales">
-
                                     <!-- <span class="sales-tip">满减</span> -->
-
                                 </div>
                             </div>
                         </div>
@@ -132,46 +116,45 @@
 </template>
 
 <script>
-import slider from 'vue-concise-slider'// 引入slider组件
+import 'swiper/dist/css/swiper.css'
+
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: "App",
   
     components: {
-        slider
+         swiper,
+    swiperSlide
     },
   data() {
     return {
-       pages:[
-          {
-            title: '',
-            style:{
-             background:'#4bbfc3',
-            }
+      swiperOption: {
+        
+          slidesPerView: 1,
+          spaceBetween: 30,
+          autoplay:true,
+          loop: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
           },
-          {
-           title: '',
-           style:{
-            background:'#4bbfc3',
-            }
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
           },
-          {
-            title: 'slide3',
-            style:{
-              background:'#4bbfc3',
-            },
+          on:{
+          // 使用es6的箭头函数，使this指向vue对象
+          slideChangeTransitionStart: ()=>{
+            // 通过$refs获取对应的swiper对象
+            let swiper = this.$refs.mySwiper.swiper;
+            // let i = swiper.activeIndex;      
+            var sty = window.getComputedStyle(swiper.slides[swiper.activeIndex], null);                                          
+            this.filterimg = sty['background-image'];
           }
-        ],
-       //滑动配置[obj]
-        sliderinit: {
-          currentPage: 0,//当前页码
-          thresholdDistance: 500,//滑动判定距离
-          thresholdTime: 100,//滑动判定时间
-          autoplay:1000,//自动滚动[ms]
-          loop:true,//循环滚动
-          direction:'vertical',//方向设置，垂直滚动
-          infinite:1,//无限滚动前后遍历数
-          slidesToScroll:1,//每次滑动项数
+        }
+
         },
+
       bannerlist: [],
       teacherlist: [],
       filterimg: "",
@@ -181,48 +164,21 @@ export default {
       timecount: 0
     };
   },
+    computed: {
+      swiper() {
+        return this.$refs.mySwiper.swiper
+      }
+    },
   methods: {
-         swiper() {
+    callback(index){
+console.log(this);
+
+    },
+         banner() {
                    
                     this.$http.get('cloud/content/getAllBanners')
                         .then(function (response) {
-
                             this.bannerlist = response.data.data;
-
-                            // that.$nextTick(function () {
-                            //     var swiper = new Swiper('.swiper-container', {
-                            //         observe: true,
-                            //         observeParents: true,
-                            //         // observeSlideChildren: true,
-                            //         speed: 1000,
-                            //         slidesPerView: 1,
-                            //         spaceBetween: 30,
-                            //         loop: true,
-                            //         // autoplay: true,
-                            //         autoplay: {
-                            //             delay: 3000
-                            //         }, //可选选项，自动滑动
-                            //         pagination: {
-                            //             el: '.swiper-pagination',
-                            //             clickable: true,
-                            //         },
-                            //         navigation: {
-                            //             nextEl: '.swiper-button-next',
-                            //             prevEl: '.swiper-button-prev',
-                            //         },
-                            //         on: {
-                            //             slideChangeTransitionStart: function () {
-
-                            //                 var sty = window.getComputedStyle(this
-                            //                     .slides[this.activeIndex], null)
-
-                            //                 that.filterimg = sty['background-image'];
-                            //             }
-                            //         }
-                            //     });
-                            // })
-
-
                         }.bind(this))
                         .catch(function (error) {
                             console.log(error);
@@ -230,7 +186,6 @@ export default {
 
                 },
     getTeacherPic() {
-      
         this.$http.get("cloud/content/getAllTeachersImage")
         .then(
           function(response) {
@@ -239,19 +194,12 @@ export default {
         )
         .catch();
     },
-    getDiscountCourses() {
-      
+    getDiscountCourses() { 
         this.$http.get( "cloud/course/getDiscountCourses")
         .then(
           function(response) {
              this.discount =response.data.data;
-            // this.setCountTime(response.data.data);
-            // setInterval(
-            //   function() {
-            //     this.setCountTime(response.data.data);
-            //   }.bind(this),
-            //   1000
-            // );
+          
           }.bind(this)
         )
         .catch();
@@ -268,10 +216,12 @@ export default {
     }
   },
   mounted() {
-     this.swiper();
+
+   this.banner();
     this.getTeacherPic();
     this.getDiscountCourses();
     this.getCommonCourses();
+
   }
 };
 </script>
@@ -279,18 +229,20 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import '../assets/css/index.css';
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+        .swiper-container {
+            width: 90%;
+            height: 98%;
+            border-radius: 10px;
+            box-shadow: 0 8px 8px 0 rgba(7, 17, 27, .06);
+        }
+        
+        /* .swiper-button-prev {
+            background-image: url('../img/arrow.png') !important;
+            height: 25px !important;
+            transform: rotateZ(180deg);
+        }
+        .swiper-button-next {
+            background-image: url('../img/arrow.png') !important;
+            height: 25px !important;
+        } */
 </style>
