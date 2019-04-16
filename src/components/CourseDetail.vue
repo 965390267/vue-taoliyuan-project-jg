@@ -10,9 +10,9 @@
                     <ul>
                         <li><em>课程名称:</em> {{coursedetail.name}}</li>
                         <li><em>讲师:</em> 臧志鸿</li>
-                        <li ><em >价格:</em><em class='red'>￥{{coursedetail.price}}</em></li>
+                        <li ><em >原价:</em><em class='red'>￥{{coursedetail.price}}</em></li>
 
-                        <li v-if="coursedetail.source"><em>vip会员价:</em> ￥98</li>
+                        <li v-if="coursedetail.discountPrice"><em>现价:</em> ￥{{coursedetail.discountPrice}}</li>
                        
                         <li> <mu-button color="secondary">去购买</mu-button> </li>
                     </ul>

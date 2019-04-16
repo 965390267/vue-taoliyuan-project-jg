@@ -5,7 +5,7 @@
         <span class="tit-icon icon-shizhan-l tit-icon-l"></span>
         <!-- <span v-html="title"></span> -->
 
-        <em>我</em>／<em>的</em>／<em>课</em>／<em>程</em>
+        <em>免</em>／<em>费</em>／<em>课</em>／<em>程</em>
         <span class="tit-icon icon-shizhan-r tit-icon-r"></span>
       </h3>
       <div class="clearfix types-content" >
@@ -51,6 +51,7 @@
         </div>
       </div>
     </div>
+
 </template>
 <script>
 export default {

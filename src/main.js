@@ -4,7 +4,7 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import 'muse-ui/lib/styles/base.less';
-import { Alert,Button, Select,Progress ,TextField,Tabs,Icon,Snackbar} from 'muse-ui';
+import { Alert,Button, Select,Progress ,TextField,Tabs,Icon,Snackbar,Form,Checkbox,Pagination} from 'muse-ui';
 import 'muse-ui/lib/styles/theme.less';
 import NProgress from 'muse-ui-progress';
 import 'muse-ui-progress/dist/muse-ui-progress.css';
@@ -36,6 +36,9 @@ Vue.use(Toast,{
   warningIcon: '',     // 提醒信息图标
   errorIcon: ''              // 错误信息图标
 });
+Vue.use(Pagination);
+Vue.use(Form);
+Vue.use(Checkbox);
 Vue.use(Alert);
 // Vue.use(NProgress);
 Vue.use(Button);
@@ -76,7 +79,7 @@ axios.interceptors.response.use(data => { // 响应成功关闭loading
   // Toast.error('加载超时');
 
   if(!data.data.success){
-    Toast.error(data.data.msg);
+    Toast.message(data.data.msg);
   }
 return data
 }, error => {

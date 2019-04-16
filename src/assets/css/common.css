@@ -1,6 +1,29 @@
 body{
     background-color: #f8fafc;
 }
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-button {
+    display: none;
+}
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:horizontal {
+    border-width: 0 3px;
+    border-style: solid;
+    border-color: #c5e1a5;
+    background: #c5e1a5;
+}
+::-webkit-scrollbar-track, ::-webkit-scrollbar-track-piece {
+    width: 8px;
+    height: 8px;
+}
+
+::selection {
+    background: #c5e1a5;
+    color: #fff;
+    text-shadow: none;
+}
 /* 导航栏样式 */
 header{
     min-width: 1200px;
@@ -69,6 +92,7 @@ header{
 
 } */
 .search{
+    cursor: pointer;
     position: absolute;
     right: 18px;
     top: 26px;
@@ -118,6 +142,7 @@ header{
 /* 底部footer样式 */
 footer{
     margin-top:40px; 
+
 }
 footer p{
     text-align: center;
@@ -218,7 +243,7 @@ cursor: pointer;
     width: 300px;
     margin: 0 auto;
 }
-.login-regist-alert input,.regist-alert input{
+/* .login-regist-alert input,.regist-alert input{
  
         width: 270px;
         height: 42px;
@@ -244,7 +269,7 @@ cursor: pointer;
         -webkit-transition: all .2s;
         -ms-transition: all .2s;
     
-}
+} */
 #login-password{
     width: 180px;
    
@@ -261,17 +286,17 @@ cursor: pointer;
     width: 100%;
     height: 100%;
 }
-.login-regist-alert input:focus ,.regist-alert input:focus{
+/* .login-regist-alert input:focus ,.regist-alert input:focus{
     outline: 0;
     -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset,0 2px 7px 0 rgba(0,0,0,.2);
     -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset, 0 2px 7px 0 rgba(0,0,0,.2);
     box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset, 0 2px 7px 0 rgba(0,0,0,.2);
-}
+} */
 .login-regist-alert  button ,.regist-alert button{
     cursor: pointer;
+    outline: none;
     width: 300px;
     height: 44px;
-    margin-top: 25px;
     padding: 0;
     background: #ffa940;
     -moz-border-radius: 6px;
@@ -303,7 +328,7 @@ cursor: pointer;
 .swiper_wrap{
     position: relative;
     margin-top: 30px;
-    height: 250px;
+    height: 240px;
 
 }
 /* swiper样式 */
@@ -322,6 +347,7 @@ cursor: pointer;
     width: 216px;
     /* height: 252px; */
     position: relative;
+    box-shadow: 0 8px 16px 0 rgba(7,17,27,.1);
     transition: .3s all linear;
    
 }
@@ -440,7 +466,7 @@ cursor: pointer;
     padding: 0 8px;
 }
 .course-card-container:hover .course-card-top.hashadow {
-    box-shadow: 0 8px 16px 0 rgba(7,17,27,.1);
+    box-shadow: 0 8px 16px 0 rgba(7,17,27,.2);
 }
 .course-card-container:hover .course-card-name {
     color: #fa541c;

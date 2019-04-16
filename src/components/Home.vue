@@ -24,7 +24,7 @@
             </h3>
             <div class="clearfix types-content">
                 <div class="index-card-container course-card-container container" v-for='(item,index) in discount' :key='index'>
-                    <a target="_blank" class="course-card" href="" data-track="sztj-1-2">
+                    <router-link :to="{name:'CourseDetail',params:{cid:item.courseId}}" class="course-card" >
                         <div class="course-stat new">
                            新课                       
                         </div>
@@ -48,7 +48,7 @@
                                             data-timer="631543"></i></span> </div>
                             </div>
                         </div>
-                    </a>
+                    </router-link>
                 </div>
             </div>
 
@@ -60,11 +60,11 @@
             <div class="clearfix types-content">
                 <div class="index-card-container course-card-container container" v-for="(item,index) in teacherlist"
                     :key='index'>
-                    <a class="course-card" :href="'course.html?cid='+item.courseId">
+                    <router-link :to="{name:'CourseDetail',params:{cid:item.courseId}}" class="course-card">
                         <div class="course-card-top hashadow">
                             <img class="course-banner" v-lazy="item.image">
                         </div>
-                    </a>
+                    </router-link>
                 </div>
             </div>
             <h3 class="types-title">
@@ -76,7 +76,7 @@
 
                 <div class="index-card-container course-card-container container" v-for="(item,index) in common"
                     :key='index'>
-                    <a target="_blank" class="course-card" href="" data-track="sztj-1-4">
+                    <router-link :to="{name:'CourseDetail',params:{cid:item.id}}" class="course-card" >
 
 
                         <div class="course-stat hot">
@@ -106,7 +106,7 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </div>

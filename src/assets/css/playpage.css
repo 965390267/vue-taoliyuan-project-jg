@@ -22,7 +22,14 @@
     padding: 6px 0;
     overflow: hidden;
 }
-
+.Cataloglist li:hover{
+    /* box-shadow: 0px 0px 10px 0px #ccc; */
+    background: rgba(0,0,0,.04);
+  
+}
+.Cataloglist li:hover a{
+    color: #c28185;
+}
 .Cataloglist h3 {
     text-align: center;
     color: #727a80;

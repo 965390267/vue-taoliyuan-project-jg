@@ -11,10 +11,10 @@
             <router-link to="/coursepage">课程页</router-link>
           </li>
           <li>
-            <router-link to="/coursepage">免费课程</router-link>
+            <router-link to="/freecourse">免费课程</router-link>
           </li>
           <li>
-            <router-link to="/mysutdy">我的学习</router-link>
+            <router-link to="/mystudy">我的学习</router-link>
           </li>
         </ul>
         <div class="search-wrap">
@@ -38,6 +38,10 @@
       <p>企业合作 人才招聘 联系我们 讲师招募 帮助中心 意见反馈 代码托管 友情链接</p>
       <p>&copy;2019 dffff.com 京ICP备 12003892号-11 技术支持zzh</p>
     </footer>
+
+
+
+
       <!-- 登录弹窗 -->
         <div class="login-regist-alert" v-show='login_dialog' style='display: none;'>
             <div class="white_alert_box">
@@ -47,21 +51,27 @@
                     <div class="hand hand-r"></div>
                 </div>
                 <h3>登录</h3>
+ 
                 <form>
                     <div>
-                        <input type="text" name="username" v-model="login_mobile" class="login-username"
-                            placeholder="用户名或手机号">
+                      
+     <mu-text-field v-model="login_mobile" label="用户名或手机号"  label-float max-length='11' underline-color='#ffab91' color='#ffab91'></mu-text-field>
+                      
                     </div>
                     <div>
-                        <input type="text" name="login-code" v-model="login_code" id='login-password'
-                            class="login-password" placeholder="请输入验证码">
+                      <div class="self-width">
+                         <mu-text-field v-model="login_code"   full-width label="请输入验证码" label-float  underline-color='#ffab91' color='#ffab91'></mu-text-field>
+                      </div>
+                      
+                       
                         <div id="getcode" @click='changecode'><img :src="codebase64" alt="" srcset=""></div>
                     </div>
                     <div>
-                        <input type="password" name="password" v-model="login_password" class="login-password"
-                            placeholder="密码">
+                      <mu-text-field v-model="login_password"   label="密码" label-float  type="password" underline-color='#ffab91' color='#ffab91'></mu-text-field>
+                       
                     </div>
-                    <button id="login-btn" type="button" @click='login'>登 录</button>
+                     <mu-button @click="login">登 录</mu-button>
+                  
                 </form>
             </div>
         </div>
@@ -77,20 +87,22 @@
                 <h3>注册</h3>
                 <form>
                     <div>
-                        <input type="text" name="username" v-model="regist_mobile" class="regist-username"
-                            placeholder="手机号码">
+                       <mu-text-field v-model="regist_mobile"  label="手机号码" label-float max-length='11' underline-color='#ffab91' color='#ffab91'></mu-text-field>
+                       
                     </div>
                     <div>
-                        <input type="text" id='testcode' v-model="regist_inputcode" name="text" class="regist-password"
-                            placeholder="请输入验证码">
+                       <div class="self-width">
+                         <mu-text-field v-model="regist_inputcode"  full-width label="请输入验证码" label-float  underline-color='#ffab91' color='#ffab91'></mu-text-field>
+                      </div>
+                       
                         <button id="testcode-btn" type='button' @click='sendcode'>发送验证码</button>
                     </div>
                     <div>
-                        <input type="password" v-model="regist_password" name="regist-password" class="password"
-                            placeholder="密码">
+                       <mu-text-field v-model="regist_password"   label="密码" label-float  type="password" underline-color='#ffab91' color='#ffab91'></mu-text-field>
+                     
                     </div>
-
-                    <button id="regist-btn" type="button" @click='regist'>注 册</button>
+                  <mu-button @click="regist">注 册</mu-button>
+                   
                 </form>
             </div>
         </div>
@@ -103,6 +115,7 @@ export default {
   name: "App",
   data() {
     return {
+      visibility: false,
       login_dialog:false,//登录弹窗
         regist_dialog:false,//注册弹窗
         login_mobile:'',//登录账号
@@ -113,11 +126,37 @@ export default {
         codebase64:'',
         login_code:'',
         search:'',
-         isactive:''
+         isactive:'',
+           usernameRules: [
+        { validate: (val) => !!val, message: '必须填写用户名'},
+        { validate: (val) => val.length >= 3, message: '用户名长度大于3'}
+      ],
+      passwordRules: [
+        { validate: (val) => !!val, message: '必须填写密码'},
+        { validate: (val) => val.length >= 3 && val.length <= 10, message: '密码长度大于3小于10'}
+      ],
+     
+      validateForm: {
+        username: '',
+        password: '',
+      
+      }
     };
   },
   methods: {
- 
+ submit () {
+      this.$refs.form.validate().then((result) => {
+        console.log('form valid: ', result)
+      });
+    },
+    clear () {
+      this.$refs.form.clear();
+      this.validateForm = {
+        username: '',
+        password: '',
+        isAgree: false
+      };
+    },
        changecode(){
                this.getcodepic()
         },
@@ -220,4 +259,12 @@ export default {
         .swiper-pagination-bullet-active {
             background: #ffd666!important;
         }
+        .vjs-big-play-button{
+    border-radius: 100%!important;
+    width: 2em !important;
+}
+.self-width{
+  display: inline-block;
+    width: 64%;
+}
 </style>

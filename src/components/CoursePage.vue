@@ -4,13 +4,22 @@
       <!-- <div class="bk" style="background-image: url(&quot;//img1.sycdn.imooc.com/5c9229900001b4e616000540.jpg&quot;);"> -->
     </div>
     <div class="body">
+    
+      <h3 class="types-title">
+        <span class="tit-icon icon-shizhan-l tit-icon-l"></span>
+        <span v-html="title"></span>
+
+        <!-- <em>小</em>／<em>学</em>／<em>一</em>／<em>年</em>／<em>级</em> -->
+        <span class="tit-icon icon-shizhan-r tit-icon-r"></span>
+      </h3>
+      <div class="clearfix types-content" id="save-padding-left">
             <div class="menu">
           <!-- <h1>年级分类</h1> -->
           <ul id="allClass">
             <li
               v-for="(item1,index) in courseLeavel"
               @mouseleave="reset()"
-              @mouseenter="getleavel2(item1.id,item1.name,index)"
+              @mouseenter="setTitle(item1.id,item1.name,index)"
               :key="index"
             >
               <span>
@@ -28,7 +37,7 @@
                     <p
                       v-for="(item2,index) in item1.child"
                       :key="index"
-                      @click="getCourseList(item2.id)"
+                      @click="getCourseList(item2.id,item2.name)"
                     >{{item2.name}}</p>
                   
                   </dd>
@@ -40,15 +49,6 @@
             <div class="clear"></div>
           </ul>
         </div>
-      <h3 class="types-title">
-        <span class="tit-icon icon-shizhan-l tit-icon-l"></span>
-        <span v-html="title"></span>
-
-        <!-- <em>小</em>／<em>学</em>／<em>一</em>／<em>年</em>／<em>级</em> -->
-        <span class="tit-icon icon-shizhan-r tit-icon-r"></span>
-      </h3>
-      <div class="clearfix types-content" id="save-padding-left">
-    
         <div
           class="index-card-container course-card-container container"
           v-for="(item,index) in courselist"
@@ -88,7 +88,11 @@
             </div>
           </router-link>
         </div>
+       
       </div>
+      
+    <mu-pagination raised circle :total="total" :current.sync="current"></mu-pagination>
+
     </div>
   </div>
 </template>
@@ -96,36 +100,56 @@
 export default {
   data() {
     return {
+      total:0,
+       current: 1,
       title: " <em>一</em>／<em>年</em>／<em>级</em>",
       filterimg: "1111",
       stage: [],
       courselist: [],
       isactive: -1,
       courseLeavel: [],
-      isactiveColor:0
+      isactiveColor:0,
+      htmlTag:''
     };
   },
   methods: {
       reset(){
-     this.isactive=-1;
+     this.isactive=0;
+
       },
 
-    getCourseList(name) {//根据年级获取课程
+    getCourseList(id,name) {//根据年级获取课程
     this.isactive=-1;
+ if(name){
+          for (var index = 0; index < name.length; index++) {
+        var char = name[index];
+        this.htmlTag += "<em>" + char + "</em>／";
+      }
+       this.title = this.htmlTag;
+}
+      
       this.$http
-        .get("cloud/course/getCoursesByGrade?grade=" + encodeURIComponent(name))
+        .get("cloud/course/getCoursesByGrade?grade=" +id)
         .then(response => {
-             this.courselist=response.data.data;
+          if(response.data.success){
+              this.courselist=response.data.data;
+             this.total=Math.ceil((this.courselist.length)/6);
+
+         
+          }else{
+            this.courselist=[];
+          }
+             
         })
         .catch();
     },
 
     getstage() {
-      //获取学习阶段(小升初、初中、高中)
+      //获取学习阶段(小升初、初中、高中),通过两次请求构造出一个二级树形结构的数组对象以便以遍历两级菜单
   let that=this;
       this.$http
         .get("cloud/level/getStage")
-        .then(response => {
+        .then(response => {//取得年级
           if (response.data.success) {
             return response.data.data;
           }
@@ -135,17 +159,20 @@ export default {
           let axiosList = [];
           data.map((item, index) => {
             arr.push(item);
-            axiosList.push(
+            axiosList.push(//根据年级取到对应的详细的年级列表
               this.$http.get("cloud/grade/getGradesByStage?stage=" + item.id)
             );
           });
-          this.$http.all(axiosList).then(
+          this.$http.all(axiosList).then(//promise.all让请求的顺序按预期执行
             this.$http.spread(function(){
               //分别是请求的返回值
               for (let index = 0; index < arguments.length; index++) {
                 arr[index].child = arguments[index].data.data;
               }
                that.courseLeavel = arr;
+             
+               
+               that.getCourseList(that.courseLeavel[0].child[0].id);//初始化的时候取到第一个的值
             })
           );
           //   this.courseLeavel = arr;
@@ -160,28 +187,23 @@ export default {
         })
         .catch();
     },
-    getleavel2(id, name,index) {
+    setTitle(id, name,index) {
         this.isactiveColor=index;
-      var htmlTag = "";
+        this.htmlTag='';
+      // var htmlTag = "";
       for (var index = 0; index < name.length; index++) {
         var char = name[index];
-        htmlTag += "<em>" + char + "</em>／";
+        this.htmlTag += "<em>" + char + "</em>／";
       }
-      this.title = htmlTag;
+      this.title = this.htmlTag;
       this.isactive = id;
     }
   },
   mounted() {
-    //   this.getAllGrades();
-    this.getstage();
-    this.$nextTick(function(){
 
-    })
-   
-  },beforeUpdate() {
-    //    this.getCourseList(this.courseLeavel[0].child[0].name)
-       console.log(this.courseLeavel);
-  },
+    this.getstage();
+
+  }
 };
 </script>
 <style scoped>
@@ -189,5 +211,10 @@ export default {
 @import "../assets/css/tabs.css";
 .activecolor{
     color: rgb(221, 117, 117);
+}
+
+.mu-pagination{
+  justify-content: center;
+  margin-top: 30px;
 }
 </style>

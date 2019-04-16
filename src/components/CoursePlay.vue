@@ -137,11 +137,8 @@ export default {
     width: 80%;
 }
 .types-content{
-        width: 70%;
+    width: 70%;
     margin: 0 auto;
 }
-.video-js .vjs-big-play-button{
-    border-radius: 100%;
-    width: 2em !important;
-}
+
 </style>

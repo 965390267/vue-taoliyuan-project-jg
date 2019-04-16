@@ -11,9 +11,9 @@ ul, ol {
 	list-style-type: none;
 }
 .menu {
-	float: left;
-	margin-top: 100px;
-	margin-left: 40px;
+	position: absolute;
+    left: 30px;
+    top: 0px;
 	width: 260px;
 	z-index: 999;
 	background-color: #fff;
@@ -48,6 +48,7 @@ ul, ol {
 .menu ul li p{
 	padding: 12px 0;
 	cursor: pointer;
+	text-align: center;
 	border-bottom: 1px solid #dbdbdb;
 }
 .menu ul li p:hover{

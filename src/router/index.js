@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 const Home = () => import('@/components/Home')
 const CoursePage = () => import('@/components/CoursePage')
+const FreeCourse = () => import('@/components/FreeCourse')
 const CourseDetail = () => import('@/components/CourseDetail')
 const CoursePlay = () => import('@/components/CoursePlay')
 const MyStudy = () => import('@/components/MyStudy')
@@ -18,13 +19,13 @@ export default new Router({
     },
     {
       path: '/coursepage',
-      name: 'coursePage',
+      name: 'CoursePage',
       component: CoursePage
     },
     {
-      path: '/coursepage',
-      name: 'coursePage',
-      component: CoursePage
+      path: '/freecourse',
+      name: 'FreeCourse',
+      component: FreeCourse
     },
     {
       path: '/mystudy',
