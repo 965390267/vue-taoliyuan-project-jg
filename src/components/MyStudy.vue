@@ -1,4 +1,5 @@
 <template>
+<div class="home">
     <div class="body">
     
       <h3 class="types-title">
@@ -51,9 +52,11 @@
         </div>
       </div>
     </div>
+        </div>
 </template>
 <script>
 export default {
+
   data() {
     return {
       courselist: [],
@@ -66,6 +69,7 @@ export default {
       this.$http
         .get("cloud/course/getDiscountCourses")
         .then(response => {
+       
              this.courselist=response.data.data;
         })
         .catch();

@@ -1,4 +1,5 @@
 <template>
+<div class="home">
     <div class="body">
     
       <h3 class="types-title">
@@ -51,7 +52,7 @@
         </div>
       </div>
     </div>
-
+</div>
 </template>
 <script>
 export default {

@@ -121,7 +121,6 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: "App",
-  
     components: {
          swiper,
     swiperSlide
@@ -216,7 +215,6 @@ console.log(this);
     }
   },
   mounted() {
-
    this.banner();
     this.getTeacherPic();
     this.getDiscountCourses();

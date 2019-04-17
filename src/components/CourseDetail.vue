@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="home">
            <div class="body">
             <div class="video-wrap">
 
@@ -18,9 +18,6 @@
                     </ul>
                 </div>
             </div>
-
-
-
             <!--header end-->
             <div class="switch-tabs">
                 <div class="tabs">
@@ -71,11 +68,6 @@
                    
                 </div>
             </div>
-
-
-
-
-
         </div>
 </div>
 </template>

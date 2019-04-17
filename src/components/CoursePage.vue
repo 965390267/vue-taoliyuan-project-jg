@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <div class="swiper_wrap" id="course-low-height">
       <!-- <div class="bk" style="background-image: url(&quot;//img1.sycdn.imooc.com/5c9229900001b4e616000540.jpg&quot;);"> -->
     </div>

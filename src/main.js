@@ -66,8 +66,6 @@ var loadinginstace;
 axios.interceptors.request.use(config => {
   //  ui Loading方法
 
-
-
   return config
 }, error => {
  

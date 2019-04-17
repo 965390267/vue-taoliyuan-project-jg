@@ -1,4 +1,5 @@
 <template>
+<div class="home">
        <div class="body">
         <div class="video-wrap">
             <div class="prism-player" id="player-con">
@@ -75,6 +76,7 @@
             </div>
            
         </div>
+    </div>
     </div>
 </template>
 

@@ -7,7 +7,6 @@ const CourseDetail = () => import('@/components/CourseDetail')
 const CoursePlay = () => import('@/components/CoursePlay')
 const MyStudy = () => import('@/components/MyStudy')
 
-
 Vue.use(Router)
 
 export default new Router({
@@ -44,5 +43,17 @@ export default new Router({
       name: 'CoursePlay',
       component: CoursePlay
     }
-  ]
+  
+  ],
+  // scrollBehavior (to, from, savedPosition) {
+  //     if (savedPosition) {        
+  //           return savedPosition    
+  //     } else {      
+  //           if (from.meta.keepAlive) {        
+  //                from.meta.savedPosition = document.body.scrollTop;      
+  //           }        
+  //           return { x: 0, y: to.meta.savedPosition || 100 }    
+  //     }  
+  //   }
+  
 })

@@ -26,6 +26,10 @@ body{
 }
 /* 导航栏样式 */
 header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
     min-width: 1200px;
     height: 72px;
     box-shadow: 0 4px 8px 0 rgba(7,17,27,.1);
@@ -45,6 +49,7 @@ header{
     float: left;
 }
 .list li{
+   
     float: left;
     padding: 0 20px;
     color: #07111b;
@@ -55,15 +60,33 @@ header{
 }
 
 .list li a{
+    position: relative;
     display: block;
     height: 72px;
     width: 72px;
     text-align: center;
     color:#07111b;
 }
+
+.list li a:before {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+    display: block;
+    width: 100%;
+    border-bottom: 2px #f76b1c solid;
+    transform: scaleX(0);
+    transition: transform .25s ease-in-out;
+}
+.list li a:hover:before {
+    transform: scaleX(1);
+}
 .router-link-exact-active{
     color: #ef5350!important;
+   
 }
+
 .search-wrap{
     position: relative;
     float: left;
@@ -139,6 +162,9 @@ header{
     padding-left: 5px;
 }
 /* 导航栏样式完 */
+.home{
+    margin-top: 88px;
+}
 /* 底部footer样式 */
 footer{
     margin-top:40px; 
@@ -465,11 +491,12 @@ cursor: pointer;
     line-height: 20px;
     padding: 0 8px;
 }
-.course-card-container:hover .course-card-top.hashadow {
-    box-shadow: 0 8px 16px 0 rgba(7,17,27,.2);
+.course-card-container:hover {
+    box-shadow: 0 10px 20px 2px rgba(9, 23, 37, 0.2);
 }
 .course-card-container:hover .course-card-name {
     color: #fa541c;
+   
 }
 
 .types-title {
