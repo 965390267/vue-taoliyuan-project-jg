@@ -26,14 +26,15 @@ body{
 }
 /* 导航栏样式 */
 header{
-    position: fixed;
-    top: 0;
+    /* position: fixed;
+    top: 0; */
     width: 100%;
     z-index: 9999;
     min-width: 1200px;
-    height: 72px;
+    height: 77px;
     box-shadow: 0 4px 8px 0 rgba(7,17,27,.1);
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: hsla(0,0%,100%,.4);
 }
 .header-wrap{
     max-width: 1800px;
@@ -86,7 +87,10 @@ header{
     color: #ef5350!important;
    
 }
-
+.router-link-exact-active::before{
+    transform: scaleX(1)!important;
+   
+}
 .search-wrap{
     position: relative;
     float: left;
@@ -163,7 +167,7 @@ header{
 }
 /* 导航栏样式完 */
 .home{
-    margin-top: 88px;
+    /* margin-top: 88px; */
 }
 /* 底部footer样式 */
 footer{

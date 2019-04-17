@@ -4,7 +4,7 @@
             <div class="bk" :style="{backgroundImage:''+filterimg+''}">
             </div>
             <!-- Swiper -->
-          <swiper :options="swiperOption" ref="mySwiper" @someSwiperEvent="callback">
+          <swiper v-if="bannerlist.length>1" :options="swiperOption" ref="mySwiper" @someSwiperEvent="callback">
     <!-- slides -->
   <div class="swiper-slide" v-for="item in bannerlist"
                         :style="{backgroundImage:'url('+item.image+')'}" :key='item.id'>
@@ -128,10 +128,13 @@ export default {
   data() {
     return {
       swiperOption: {
-        
+      
           slidesPerView: 1,
           spaceBetween: 30,
-          autoplay:true,
+         autoplay: {
+　　　　delay: 2000,
+　　disableOnInteraction: false
+　　},
           loop: true,
           pagination: {
             el: '.swiper-pagination',
@@ -146,9 +149,13 @@ export default {
           slideChangeTransitionStart: ()=>{
             // 通过$refs获取对应的swiper对象
             let swiper = this.$refs.mySwiper.swiper;
-            // let i = swiper.activeIndex;      
-            var sty = window.getComputedStyle(swiper.slides[swiper.activeIndex], null);                                          
+            // let i = swiper.activeIndex;   
+          
+               if(swiper){
+            let sty = window.getComputedStyle(swiper.slides[swiper.activeIndex], null);                                          
             this.filterimg = sty['background-image'];
+               }
+           
           }
         }
 
