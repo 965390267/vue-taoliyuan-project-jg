@@ -13,7 +13,7 @@
                         <li ><em >原价:</em><em class='red'>￥{{coursedetail.price}}</em></li>
 
                         <li v-if="coursedetail.discountPrice"><em>现价:</em> ￥{{coursedetail.discountPrice}}</li>
-                       
+                       <li v-if="coursedetail.buyerNum"><em>已有:</em>{{coursedetail.buyerNum}} 人购买</li>
                         <li> <mu-button color="secondary">去购买</mu-button> </li>
                     </ul>
                 </div>
