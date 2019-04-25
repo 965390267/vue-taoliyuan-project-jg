@@ -54,7 +54,7 @@
           v-for="(item,index) in courselist"
           :key="index"
         >
-          <router-link :to="{name:'CourseDetail',params:{cid:item.id}}" class="course-card">
+          <router-link :to="{path:'/coursedetail',query:{cid:item.id}}" class="course-card">
             <div class="course-card-top hashadow">
               <img class="course-banner" v-lazy="item.cover">
 

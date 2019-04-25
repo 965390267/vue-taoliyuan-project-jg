@@ -260,9 +260,15 @@ export default {
             background: #ffd666!important;
         }
         .vjs-big-play-button{
-    border-radius: 100%!important;
+    /* border-radius: 100%!important; */
     width: 2em !important;
 }
+
+.video-js:hover .vjs-big-play-button, .vjs-custom-skin > .video-js .vjs-big-play-button:focus, .vjs-custom-skin > .video-js .vjs-big-play-button:active {
+    background: #91d5ff!important;
+    outline: none;
+}
+
 .self-width{
   display: inline-block;
     width: 64%;

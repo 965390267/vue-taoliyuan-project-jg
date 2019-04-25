@@ -6,7 +6,8 @@
                 <div class="fengmian-wrap"  :style="{backgroundImage:'url('+coursedetail.cover+')'}">
 
                 </div>
-                <div class="right-corse-mes">
+                <div class="right-corse-mes" >
+                   
                     <ul>
                         <li><em>课程名称:</em> {{coursedetail.name}}</li>
                         <li><em>讲师:</em> 臧志鸿</li>
@@ -42,17 +43,26 @@
                         <div class="swiper-slide" v-if="active1 === 1">
                             <div class="content-slide">
                                 <div class="Cataloglist">
-                                    <h3>
+                                    <div v-for="(item,index) in coursedetail.courseList" :key='index'>
+                                        <div>
+                                             <h3>
                                         第1章 node.js 调试入门
                                     </h3>
                                     <ul>
-                                        <li><router-link to='/courseplay'><span class="play-btn"></span> 1-1 Inspector 介绍
-                                                (13:00)</router-link></li>
-                                        <li><a href="playpage.html"><span class="play-btn"></span> 1-1 Inspector 介绍
-                                                (13:00)</a></li>
-                                     
+                                        <li>
+                                            <router-link  :to="{path:'/courseplay',query:{cid:item.id}}" > <span class="play-btn"></span> 1-1 Inspector 介绍 (13:00)</router-link>
+                                         </li>
+                                        <li>
+                                            <a href="playpage.html">
+                                            <span class="play-btn"></span> 1-1 Inspector 介绍
+                                                (13:00)</a>
+                                        </li>                                  
                                     </ul>
-                                    <h3>
+                                        </div>
+                                     
+                                    </div>
+                                    
+                                    <!-- <h3>
                                         第2章 node.js 调试入门
                                     </h3>
                                     <ul>
@@ -61,7 +71,7 @@
                                         <li><a href="playpage.html"><span class="play-btn"></span> 1-1 Inspector 介绍
                                                 (13:00)</a></li>
                                         
-                                    </ul>
+                                    </ul> -->
                                 </div>
                             </div>
                         </div>
@@ -94,7 +104,7 @@ export default {
          },
   },
   mounted(){
-       this.getCourseDetail(this.$route.params.cid)
+       this.getCourseDetail(this.$route.query.cid)
       console.log(this.$route);
       
   }
