@@ -38,10 +38,6 @@
       <p>企业合作 人才招聘 联系我们 讲师招募 帮助中心 意见反馈 代码托管 友情链接</p>
       <p>&copy;2019 dffff.com 京ICP备 12003892号-11 技术支持zzh</p>
     </footer>
-
-
-
-
       <!-- 登录弹窗 -->
         <div class="login-regist-alert" v-show='login_dialog' style='display: none;'>
             <div class="white_alert_box">

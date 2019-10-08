@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const Home = () => import('@/components/Home')
-const CoursePage = () => import('@/components/CoursePage')
-const FreeCourse = () => import('@/components/FreeCourse')
-const CourseDetail = () => import('@/components/CourseDetail')
-const CoursePlay = () => import('@/components/CoursePlay')
-const MyStudy = () => import('@/components/MyStudy')
+const Home = () => import('@/view/Home')
+const CoursePage = () => import('@/view/CoursePage')
+const FreeCourse = () => import('@/view/FreeCourse')
+const CourseDetail = () => import('@/view/CourseDetail')
+const CoursePlay = () => import('@/view/CoursePlay')
+const MyStudy = () => import('@/view/MyStudy')
 
 Vue.use(Router)
 
@@ -42,9 +42,11 @@ export default new Router({
       path: '/courseplay',
       name: 'CoursePlay',
       component: CoursePlay
-    }
-  
-  ],
+    },
+    {
+      path: '*',
+      component: Home
+    }],
   // scrollBehavior (to, from, savedPosition) {
   //     if (savedPosition) {        
   //           return savedPosition    
@@ -55,5 +57,5 @@ export default new Router({
   //           return { x: 0, y: to.meta.savedPosition || 100 }    
   //     }  
   //   }
-  
+
 })

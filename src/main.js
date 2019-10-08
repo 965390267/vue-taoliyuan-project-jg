@@ -36,17 +36,7 @@ Vue.use(Toast,{
   warningIcon: '',     // 提醒信息图标
   errorIcon: ''              // 错误信息图标
 });
-Vue.use(Pagination);
-Vue.use(Form);
-Vue.use(Checkbox);
-Vue.use(Alert);
-// Vue.use(NProgress);
-Vue.use(Button);
-Vue.use(Select);
-Vue.use(Progress);
-Vue.use(Helpers);
-Vue.use(TextField);
-Vue.use(Tabs);
+Vue.use(Pagination).use(Form).use(Checkbox).use(Alert).use(Button).use(Select).use(Progress).use(Helpers).use(TextField).use(Tabs);
 Vue.use(NProgress, {
   zIndex: 2000,          // progress z-index
   top: 0,                // position fixed top
